@@ -1,205 +1,249 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-  
-    <link rel="stylesheet" href="main.css">
-     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Home</title>
 
-    <style>
-      *{
-        box-sizing: border-box;  
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Arise Anime</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div id="container1">
+  <nav>
 
-      html{
-        height: 100vh;
-        width: 100vw;
-        margin:0;
-        padding:0;
-      }
-
-      body{
-        margin:0;
-        padding:0;
-        height: 100%;
-        width: 100%;
-      }
-
-    </style>
-
-  </head>
-  <body>
-    <nav class="purple">
-      <div class="nav-wrapper" style="padding-left: 20px; padding-right: 20px;">
-        <a href="#" class="brand-logo">Home <span id="user"></span></a>
-        <ul class="right">
-          <li>
-            <button class="btn waves-effect waves-light" id="logoutBtn" style="display: none">
-              Logout
-            </button>
-          </li>
-          <li>
-            <button class="btn waves-effect waves-light" id="loginBtn" >
-              Login
-            </button>
-          </li>
-        </ul>
-       
-      </div>
-    </nav>
-
-    <div class="row">
-
+    <div id="logo-container">
+      <img id="logo" src="https://c4.wallpaperflare.com/wallpaper/983/463/791/solo-leveling-red-eyes-smiling-evil-hd-wallpaper-preview.jpg" alt="Arise Anime Logo">
+      <h1 id="website-name">Arise Anime </h1> 
       
-      <section class="col s12 m4 push-m8">
-                
-          <div class="row">
-            <div class="col s10">
-              <form id="reviewForm">
+    </div>
+    
 
-                <h1 style="font-size: 1.5em">Selected: <span id="selectedName"></span></h1>
-  
-                <input type="hidden" id="selectedBook" name="isbn" value="null">
-                <div class="input-field">
-                    <textarea id="text" name="text" class="materialize-textarea"></textarea>
-                    <label for="text">Textarea</label>
-                </div>
-  
-                <div class="row">
-                    <div class="input-field col s4 right">
-                    <button class="btn waves-effect waves-light purple" id="reviewBtn"  type="submit">
-                        Submit
-                    </button>
-                    </div>  
-                </div>
-              </form>
-            </div>
-          </div>
+    <div id="buttons-container">
+      <a class="nav-button" id="home-button" href="#home-page" onclick="showHomePage()">Home</a>
 
-          <div class="row hide-on-small-only" style="height: 40vh; overflow-y: scroll;">
-                <ul class="collection" id="reviews">
-                  
-                </ul>
-          </div>
-      
-      </section>
-
-      <section class="col s12 m8 pull-m4" style="overflow-y:scroll; height: 86vh; margin-top: 10px;">
-        <div class="row" id="books">
-           
-        </div>
-      </section>
-
-
+      <a class="nav-button" id="popular-button" href="#Popular-anime" onclick="showGenrePage('Popular')">Popular</a>
+      <a class="nav-button" id="new-button" href="#New-anime" onclick="showGenrePage('New')">New</a>
+      <a class="nav-button" id="old-school-button" href="#Old-School-anime" onclick="showGenrePage('Old School')">Old School</a>
     </div>
 
+    <div id="search-bar">
+      <input type="text" name="movie" id="search-movie" placeholder="Search">
+      <button id="search-button" onclick="searchAnimeTitle()">Search</button>
+     
+      <ul class="right">
+        <li>
+          <button class="btn waves-effect waves-light" id="logoutBtn" style="display: none">
+            Logout
+          </button>
+        </li>
+        <li>
+          <button class="btn waves-effect waves-light" id="loginBtn" >
+            Login
+          </button>
+        </li>
+      </ul>
+    </div>
+    
+  </nav>
+  <h2 style="color:white" id="user"></h2>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Verdana, sans-serif;
+      }
+
+      .mySlides {
+        display: none;
+        border: 2px solid #ddd; 
+      }
+
+      img {
+        vertical-align: middle;
+        max-height: 610px; 
+        width: 100%; 
+        border: 2px solid #ddd; 
+      }
+
+      /* Slideshow container */
+      .slideshow-container {
+        max-width: 89%; 
+        position: relative;
+        margin: auto;
+        margin-top: 50px; 
+        overflow: hidden; 
+      }
+
+
+      .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 20s ease;
+      }
+
+      .active {
+        background-color: #717171;
+      }
+
+
+      .fade {
+        animation-name: fade;
+        animation-duration: 30s;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 1
+        }
+
+        to {
+          opacity: 0.3
+        }
+      }
+
+      @media only screen and (max-width: 300px) {
+        .text {
+          font-size: 11px
+        }
+      }
+    </style>
+    </head>
+
+    <body>
+
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <img src="   https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c162bb22-7f42-4fe6-b5bc-8abb24697e1a/d8qwlg5-be255a64-b719-4643-a9da-bc94b141d481.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2MxNjJiYjIyLTdmNDItNGZlNi1iNWJjLThhYmIyNDY5N2UxYVwvZDhxd2xnNS1iZTI1NWE2NC1iNzE5LTQ2NDMtYTlkYS1iYzk0YjE0MWQ0ODEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.UuRA0yRdq-TuXsJweDlT5v5la_ZQuVfotwvnL6uNfaE">
+      </div>
+      <div class="mySlides fade">
+        <img src="https://sugoimart.com/cdn/shop/articles/MINI-Bleach-1000x600_1200x.jpg?v=1666620070">
+      </div>
+      <div class="mySlides fade">
+        <img src="https://ramenparados.com/wp-content/uploads/2018/02/Steins-Gate-0-anime-1000x600.jpg">
+      </div>
+    </div>
+    <br>
+    <div style="text-align:center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
     <script type="module">
-      import { signIn, logout, auth, setAuthListeners } from './auth.js';
-      import { getBooks, getReviews, createReview, deleteReview } from './data.js';
+      let slideIndex = 0;
+      showSlides();
 
-      let loginBtn = document.querySelector('#loginBtn');
-      let logoutBtn = document.querySelector('#logoutBtn');
-      let reviewForm = document.querySelector('#reviewForm');
-
-      function setLoggedInUI(){
-          M.toast({html: 'Logged In!'})
-          document.querySelector('#user').innerHTML = `Signed in Anonymously`;
-          document.querySelector('#loginBtn').style.display = 'none';
-          document.querySelector('#logoutBtn').style.display = 'inline-block';
-      }
-
-      function setLoggedOutUI(){
-          M.toast({html: 'Logged Out!'})
-          document.querySelector('#user').innerHTML = '';
-          document.querySelector('#loginBtn').style.display = 'inline-block';
-          document.querySelector('#logoutBtn').style.display = 'none';
-      }
-
-      //attatch listeners
-      logoutBtn.addEventListener('click', logout);
-      loginBtn.addEventListener('click', signIn);
-      setAuthListeners(setLoggedInUI, setLoggedOutUI);
-
-      function renderReviews(reviews){
-        let reviewsList = document.querySelector('#reviews');
-        let html = '';
-        for (let review of reviews){
-            html += `
-                <li class="collection-item">
-                    <p>Review: ${review.text}</p>
-                    <p>Reviewer: ${review.reviewer}</p>
-                </li>`;
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
         }
-        reviewsList.innerHTML = html;
-      }
-
-      function selectBook(isbn, name){
-          document.querySelector('#selectedName').innerHTML = name;
-          let selectedBook = document.querySelector('#selectedBook');
-          selectedBook.value = isbn;
-          getReviews(isbn, renderReviews);
-      }
-
-      window.selectBook = selectBook;
-
-reviewForm.addEventListener('submit', submitReivew);
-
-async function submitReivew(event){
-    event.preventDefault();
-    let form = event.target;
-    let formData = new FormData(form);
-    const { text, isbn } = Object.fromEntries(formData);
-    if(isbn === 'null'){
-        alert('Please select a book to review');
-    }
-    else if(auth.currentUser === null){
-        alert('Please login to review');
-    }else{
-      await createReview(auth, isbn, text);
-      M.toast({html: 'Review created!'});
-      form.reset();
-      getReviews(isbn, renderReviews);
-    }
-}
-
-      function renderBooks(books)
-      {
-        let booksArea = document.querySelector('#books');
-        let html = '';
-        for (let book of books){
-            html += `
-                <div class="col offset-s1 s10 m6 l4">
-                    <div class="card purple lighten-5">
-                        <div>
-                            <img src="${book.image}"  style="max-width:100%">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">${book.title}</span>
-                            <p>${book.author}</p>
-                            <p>${book.year}</p>
-                            <p>${book.publisher}</p>
-                        </div>
-                    <div class="card-action">
-                      <button class="btn waves-effect" onclick="selectBook('${book.isbn}', '${book.title}')">
-                        Review
-                      </button>
-                    </div>
-                    </div>
-                </div>`;
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1
         }
-        booksArea.innerHTML = html;
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 3000); 
       }
-
-      getBooks(renderBooks);
       
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script> M.AutoInit(); </script>
-  </body>
+    
+        import { signIn, logout, auth, setAuthListeners } from './auth.js';
+        import { getBooks, getReviews, createReview, deleteReview } from './data.js';
+
+        let loginBtn = document.querySelector('#loginBtn');
+        let logoutBtn = document.querySelector('#logoutBtn');
+        let reviewForm = document.querySelector('#reviewForm');
+
+        function setLoggedInUI(){
+            M.toast({html: 'Logged In!'})
+            document.querySelector('#user').innerHTML = `Signed in Anonymously`;
+            document.querySelector('#loginBtn').style.display = 'none';
+            document.querySelector('#logoutBtn').style.display = 'inline-block';
+        }
+
+        function setLoggedOutUI(){
+            M.toast({html: 'Logged Out!'})
+            document.querySelector('#user').innerHTML = '';
+            document.querySelector('#loginBtn').style.display = 'inline-block';
+            document.querySelector('#logoutBtn').style.display = 'none';
+        }
+
+        //attatch listeners
+        logoutBtn.addEventListener('click', logout);
+        loginBtn.addEventListener('click', signIn);
+        setAuthListeners(setLoggedInUI, setLoggedOutUI);
+
+
+
+      </script>
+<main>
+  <section id="home-page">
+      <section id="Popular-anime">
+          <div class="title">
+              <h3 class="section-heading">POPULAR ANIME OUT NOW</h3>
+          </div>
+          <div class="popular-content"></div>
+      </section>
+
+      <section id="New-anime">
+          <div class="title">
+              <h3 class="section-heading">NEW ANIME OUT NOW</h3>
+          </div>
+          <div class="new-content"></div>
+      </section>
+
+      <section id="Old-School-anime">
+          <div class="title">
+              <h3 class="section-heading">OLD SCHOOL ANIME CLASSICS</h3>
+          </div>
+          <div class="old-school-content"></div>
+      </section>
+  </section>
+
+
+  <section id="genre-page">
+
+
+    <div id="anime-list">
+      <!-- Anime list content -->
+    </div>
+  </section>
+
+  <section>
+    <div id="search-result">
+      <!-- Search result content -->
+    </div>
+  </section>
+
+  <section id="description">
+    <!-- Anime description content -->
+  </section>
+</main>
+
+<script>
+  //Initialize Materialize components here
+  document.addEventListener('DOMContentLoaded', function() {
+    const navs = M.Sidenav.init(document.querySelectorAll('.sidenav'));
+  });
+</script>
+<script src="script.js"></script>
+  </div>
+</body>
 </html>
